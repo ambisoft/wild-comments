@@ -5,6 +5,14 @@ class User
     @graph = graph
     @uid = uid
   end
+  
+  def friend(friend_id)
+    graph.get_object(friend_id)
+  end
+    
+  def friends    
+    @friends ||= graph.get_connections(uid, 'friends')    
+  end
 
   def likes
     @likes ||= graph.get_connections(uid, 'likes')

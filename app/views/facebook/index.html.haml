@@ -4,3 +4,8 @@
   %ul
     - likes.each do |like|
       %li= like['name']
+
+%h2 Your Friends
+%ul
+- @friends.each do |friend|
+  %li= link_to friend['name'], friend_path(friend['id'])
