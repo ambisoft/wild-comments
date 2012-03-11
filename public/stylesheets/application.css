@@ -112,3 +112,12 @@ ul.friends li {
 .alert-error i {
   margin-right: 3px;
 }
+
+th.comments {
+  width: 70px;
+}
+
+td.comments {
+  text-align: right;
+  padding-right: 1em;
+}
