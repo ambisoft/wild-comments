@@ -45,3 +45,9 @@ ul.entries li {
     text-align: right;
     margin: 1em 0;
 }
+
+#loading {
+    line-height: 32px;
+    padding-left: 40px;
+    background: url(../images/loading.gif) no-repeat;
+}
