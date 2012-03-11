@@ -51,3 +51,39 @@ ul.entries li {
     padding-left: 40px;
     background: url(../images/loading.gif) no-repeat;
 }
+
+.friend-name-wrapper {
+    position: relative;
+}
+
+.friend-name-wrapper h1 {
+    margin-left: 60px;
+    line-height: 50px;
+}
+
+.friend-name-wrapper img {
+    position: absolute;
+}
+
+ul.friends {
+    margin-top: 1em;
+}
+
+ul.friends li {
+    float: left;
+    display: block;
+    width: 100px;    
+    height: 100px;
+    text-align: center;    
+    font-size: 95%;
+    line-height: 1.2em;
+}
+
+.friends li img {
+    display: block;
+    margin: auto;
+}
+
+#footer {
+    clear: both;
+}

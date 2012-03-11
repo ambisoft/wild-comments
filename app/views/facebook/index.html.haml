@@ -2,6 +2,8 @@
   %li.active= 'Home'
 
 %h2 Your Friends
-%ul
-  - @friends.each do |friend|
-    %li= link_to friend['name'], friend_path(friend['id'])
+%ul.friends  
+  - @friends.each do |friend|    
+    %li.friend      
+      =friend_link(friend, image_tag(friend_url_picture(friend)))
+      =friend_link(friend, friend['name'])      

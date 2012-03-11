@@ -7,6 +7,14 @@ class Friend
     self.uid    = uid
     self.name   = name
   end
+  
+  def self.url_picture(id)
+    "http://graph.facebook.com/#{id}/picture"
+  end
+  
+  def url_profile_picture
+    Friend.url_picture(uid)    
+  end
 
   def entries(max_to_fetch = 100)    
     Rails::logger.debug("Fetching feed")

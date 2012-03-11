@@ -1,7 +1,9 @@
 
 = render 'breadcrumb'
 
-%h1= @friend.name
+.friend-name-wrapper
+  = image_tag @friend.url_profile_picture
+  %h1= @friend.name  
 
 .row
   .span8
