@@ -7,17 +7,20 @@
     = csrf_meta_tag
 
   %body
-    .container
-      #header
-        .navigation
-          = facebook_login_button('large')
-        .slogan 
-          %span WildFire 
-          Programming Challenge
-      #content
-        #fb-root
-        = yield
-      #footer
+    .wrapper
+      .container
+        #header
+          .navigation
+            = facebook_login_button('large')
+          .slogan 
+            %span WildFire 
+            Programming Challenge
+        #content
+          #fb-root
+          = yield    
+      .push
+    #footer
+      .container   
         Created by Marek Publicewicz (
         = link_to 'www.ambisoft.pl', 'http://www.ambisoft.pl'
         )

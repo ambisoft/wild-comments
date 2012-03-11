@@ -1,3 +1,22 @@
+
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -50px; /* the bottom margin is the negative value of the footer's height */
+}
+
+#footer, .push {
+	height: 50px; /* .push must be the same height as #footer */
+}
+
+
 #header .slogan {
     font-size: 30px;
     line-height: 36px;
@@ -34,7 +53,7 @@ h3 {
 }
 
 ul.entries li {
-    margin-bottom: 5px;
+    margin-bottom: 1em;
 }
 
 .meta span.date {
@@ -43,7 +62,9 @@ ul.entries li {
 
 #footer {
     text-align: right;
-    margin: 1em 0;
+    background-color: #eee;
+    line-height: 50px;
+    clear: both;
 }
 
 #loading {
@@ -84,6 +105,3 @@ ul.friends li {
     margin: auto;
 }
 
-#footer {
-    clear: both;
-}
