@@ -2,23 +2,18 @@ require 'spec_helper'
 
 describe FacebookController do
 
+  include OauthSpec
+  
   describe 'index with GET' do
-    before do
-      @user = User.new(mock('graph'), 42)
-      @oauth = mock('oauth')
-      @graph = mock('graph')
-      Koala::Facebook::OAuth.should_receive(:new).and_return(@oauth)
+    before do      
+      oauth_spec_init
     end
 
     context 'when logged into facebook' do
-      before do
-        user_info = {'access_token' => '1234567890', 'uid' => 42}
-        @oauth.should_receive(:get_user_info_from_cookie).and_return(user_info)
-        Koala::Facebook::GraphAPI.should_receive(:new).with('1234567890').and_return(@graph)
-        User.should_receive(:new).and_return(@user)
-        @likes = mock('likes')
-        @user.should_receive(:likes_by_category).and_return(@likes)
-
+      before do        
+        oauth_user_login('1234567890', 42)
+        @friends = mock('friends')
+        @user.should_receive(:friends).and_return(@friends)
         get :index
       end
 
@@ -26,15 +21,14 @@ describe FacebookController do
         response.should be_success
       end
 
-      it 'should assign likes' do
-        assigns[:likes_by_category].should == @likes
+      it 'should assign friends' do
+        assigns[:friends].should == @friends
       end
     end
 
     context 'when not logged into facebook' do
       before do
         @oauth.should_receive(:get_user_info_from_cookie).and_return(nil)
-
         get :index
       end
 

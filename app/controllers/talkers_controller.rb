@@ -1,5 +1,6 @@
 class TalkersController < ApplicationController
   
+  before_filter :require_login
   before_filter :resolve_friend!
   
   def index
