@@ -32,11 +32,24 @@ class Friend
     
   def max_talkers(entries)
     
-    talkers = {}    
-    entries.each do |entry|      
+    Rails::logger.debug('Max talkers: entries count is ' + entries.count.to_s)
+        
+    talkers = {}
+    
+    entries.each_with_index do |entry, i|
+      
+      Rails::logger.debug("Processing entry #{i}")
+      
       comments = comments_for_entry(entry)
+      
+      #Rails::logger.debug('Comments for entry: ' + comments.count.to_s)
+      
       comments.each do |comment|
         author = comment['from']
+        
+        #Rails::logger.debug('Comment author')
+        #Rails::logger.debug(author)
+        
         talkers[author['id']] ||= {
               :uid    => author['id'],
               :name   => author['name'],
@@ -46,9 +59,15 @@ class Friend
       end
     end
     
-    # sort the talkers based on # of the comments:
-    talkers.sort { |t1, t2| t2[:count] <=> t1[:count] }
+    #Rails::logger.debug("Talkers")
+    #Rails::logger.debug(talkers.values)
     
+    sort_talkers(talkers.values)
+        
+  end
+  
+  def sort_talkers(talkers)
+    talkers.sort { |t1, t2| t2[:count] <=> t1[:count] }
   end
   
   #
@@ -56,11 +75,17 @@ class Friend
   # sometimes it does not.
   #  
   def comments_for_entry(entry)
+    
     comments = entry['comments']
-    if comments['count'] == comments['data'].count
-      comments['data']
+    
+    if comments
+      if comments['count'] == comments['data'].to_a.count
+        comments['data'].to_a
+      else
+        graph.get_object(entry['id'])['comments']['data']
+      end
     else
-      graph.get_object(entry['id'])['comments']['data']
+      []
     end
   end
   

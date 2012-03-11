@@ -4,24 +4,15 @@ class TalkersController < ApplicationController
   
   def index
     
-    #entries = @friend.entries(100)
-    #@talkers = @friend.max_talkers(entries)
-    
-    @talkers = [
-      {
-        :name => 'John Doe',
-        :count  => 23        
-      },
-      {
-        :name => 'Tommy Green',
-        :count  => 22
-      }
-    ]
+    entries = @friend.entries(100)
+    @talkers = @friend.max_talkers(entries)
+        
+    #Rails::logger.debug(@talkers)
     
     stats = {
       :status         => 0,
-      :entries_count  => 100,
-      :comments_count => 59,
+      :entries_count  => 0,
+      :comments_count => 0,
       :talkers        => @talkers
     }
     
