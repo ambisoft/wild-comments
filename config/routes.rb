@@ -1,6 +1,10 @@
 FbBase::Application.routes.draw do
   
-  resources :friends
+  get "talkers/show"
+
+  resources :friends do
+    resources :talkers
+  end    
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

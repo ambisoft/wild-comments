@@ -1,10 +1,9 @@
 class FriendsController < ApplicationController
   
-  def show        
-    
-    @friend = current_user.friend(params[:id])
-    return redirect_to root_path unless @friend    
-    
-  end
+  before_filter :resolve_friend!
+  
+  def show
+    @entries = @friend.entries(10)    
+  end      
   
 end

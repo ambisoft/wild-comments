@@ -7,11 +7,14 @@ class User
   end
   
   def friend(friend_id)
-    graph.get_object(friend_id)
+    response = graph.get_object(friend_id)
+    Friend.new(graph, friend_id, response['name'])
   end
     
   def friends    
-    @friends ||= graph.get_connections(uid, 'friends')    
+    @friends ||= graph.get_connections(uid, 'friends').sort {
+      |f1, f2| f1['name'] <=> f2['name']
+    }    
   end
 
   def likes

@@ -1,1 +1,20 @@
-%h1= @friend['name']
+
+= render 'breadcrumb'
+
+%h1= @friend.name
+
+.row
+  .span8
+    %h3 Latest Entries
+    %ul.entries    
+      - @entries.each do |entry|
+        %li
+          .meta
+            %span.date= entry_date(entry['created_time'])
+            = render 'entries/by', :entry => entry
+          = render entry_partial(entry), :entry => entry    
+        
+  .span4
+    %h3 The biggest talkers
+    Loading...
+

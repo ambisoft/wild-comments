@@ -2,17 +2,25 @@
 %html
   %head
     %title Wildfire Programming Challenge
-    = stylesheet_link_tag 'application'
-    = javascript_include_tag 'jquery'
+    = stylesheet_link_tag 'bootstrap.min', 'application'
+    = javascript_include_tag 'jquery', 'bootstrap.min'
     = csrf_meta_tag
 
   %body
-    #header
-      = facebook_login_button('large')
-      %h1 WildFire Programming Challenge
-    #content
-      #fb-root
-      = yield
+    .container
+      #header
+        .navigation
+          = facebook_login_button('large')
+        .slogan 
+          %span WildFire 
+          Programming Challenge
+      #content
+        #fb-root
+        = yield
+      #footer
+        Created by Marek Publicewicz (
+        = link_to 'www.ambisoft.pl', 'http://www.ambisoft.pl'
+        )
 
 :javascript
   window.fbAsyncInit = function() {

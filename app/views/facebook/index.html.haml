@@ -1,11 +1,7 @@
-%h2 Your "likes":
-- @likes_by_category.each do |category, likes|
-  %h3= category
-  %ul
-    - likes.each do |like|
-      %li= like['name']
+%ul.breadcrumb
+  %li.active= 'Home'
 
 %h2 Your Friends
 %ul
-- @friends.each do |friend|
-  %li= link_to friend['name'], friend_path(friend['id'])
+  - @friends.each do |friend|
+    %li= link_to friend['name'], friend_path(friend['id'])

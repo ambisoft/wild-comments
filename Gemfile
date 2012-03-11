@@ -32,9 +32,10 @@ gem 'rails', '3.0.3'
 gem 'haml'
 gem 'haml-rails'
 gem 'koala'
+gem 'json'
 
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'ruby-debug'
+  #gem 'ruby-debug19'
 end

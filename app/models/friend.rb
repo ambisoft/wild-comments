@@ -1,20 +1,25 @@
 class Friend
   
-  attr_accessor :uid, :graph
+  attr_accessor :uid, :graph, :name
 
-  def initialize(graph, uid)
-    self.graph = graph
-    self.uid = uid
+  def initialize(graph, uid, name)
+    self.graph  = graph
+    self.uid    = uid
+    self.name   = name
   end
 
-  def entries(max_to_fetch = 100)
-    result = []
+  def entries(max_to_fetch = 100)    
+    Rails::logger.debug("Fetching feed")
     feed = graph.get_connections(uid, 'feed')
-    while feed.present? && result.count < max_to_fetch
-      result += feed
+    Rails::logger.debug("Fetched " + feed.count.to_s)    
+    result = feed
+    until (feed.empty? || result.count >= max_to_fetch)
+      Rails::logger.debug("Fetching the next page")
       feed = feed.next_page
+      result += feed
+      Rails::logger.debug("Result size is #{result.count}")
     end
-    result
+    result.count > max_to_fetch ? result[0, max_to_fetch] : result
   end
     
   def max_talkers(entries)
@@ -34,7 +39,7 @@ class Friend
     end
     
     # sort the talkers based on # of the comments:
-    talkers.sort { |t1, t2| t1[:count] <=> t2[:count] }
+    talkers.sort { |t1, t2| t2[:count] <=> t1[:count] }
     
   end
   
@@ -47,7 +52,7 @@ class Friend
     if comments['count'] == comments['data'].count
       comments['data']
     else
-      graph.object_get(entry['id'])['comments']['data']
+      graph.get_object(entry['id'])['comments']['data']
     end
   end
   
