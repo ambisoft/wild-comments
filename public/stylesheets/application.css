@@ -105,3 +105,10 @@ ul.friends li {
     margin: auto;
 }
 
+.alert-error {
+  font-weight: bold;
+}
+
+.alert-error i {
+  margin-right: 3px;
+}

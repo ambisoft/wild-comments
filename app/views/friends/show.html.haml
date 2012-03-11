@@ -18,5 +18,12 @@
         
   .span4
     %h3 The biggest talkers
-    #loading Loading...
+    .talkers-info
+      #loading Loading...
+
+:javascript
+  $(function() {
+     var url = '#{friend_talkers_path(@friend.uid)}';     
+     WILD_COMMENTS.pull_talkers(url);
+  });
 
