@@ -8,13 +8,19 @@ WILD_COMMENTS.render_commenters_table = function(results) {
   thead_tr.append($('<th/>').html('Name'));
   thead_tr.append($('<th/>').addClass('comments').html('Comments'));
   
-  var tbody = $('<tbody/>');  
-  $(results.talkers).each(function() {
-    var tr = $('<tr/>');
-    tr.append($('<td/>').html(this.name));
-    tr.append($('<td/>').html(this.count));
-    tbody.append(tr);
-  });  
+  var tbody = $('<tbody/>');
+  if (results.talkers.length) {
+      $(results.talkers).each(function() {
+        var tr = $('<tr/>');
+        tr.append($('<td/>').html(this.name));
+        tr.append($('<td/>').html(this.count));
+        tbody.append(tr);
+      });
+  } else {
+      var tr = $('<tr/>');
+      tr.append($('<td/>').attr('colspan', 2).html('No data available'));
+      tbody.append(tr);
+  }
   table.append(thead).append(tbody);
   
   $('.talkers-info').html(table);
