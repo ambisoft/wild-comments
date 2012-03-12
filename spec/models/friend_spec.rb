@@ -107,8 +107,7 @@ describe Friend do
     
     
   end
-  
-  
+    
   describe 'sorting commenters' do
     
     it 'should return commenters with most number of comments first' do
@@ -126,6 +125,66 @@ describe Friend do
       ]
       
     end
+  end
+  
+  describe 'max_talkers' do 
+        
+    it 'should return empty list if there are no entries' do
+      @friend.max_talkers([]).should == []
+    end
+    
+    it 'should return empty list if there are no comments' do     
+      entries = [
+        { 'id'  => 123 },
+        { 'id'  => 124 }
+      ]      
+      @friend.max_talkers(entries).should == []
+    end
+    
+    it 'should return John who has 5 comments' do
+      
+      user_john = { 'id' => 1, 'name' => 'John' }
+      user_tom = { 'id' => 2, 'name' => 'Tom' }
+      
+      entries = [
+      {
+        'id'  => 123,
+        'comments' => {
+          'count' => 2,
+          'data'  => [
+            { 'from' => user_john },
+            { 'from' => user_tom }
+          ]
+        }
+      },
+      {
+        'id'  => 124,
+        'comments' => {
+          'count' => 3,
+          'data'  => [
+            { 'from' => user_john },
+            { 'from' => user_john },
+            { 'from' => user_tom },
+          ]
+        }
+      }
+      ]
+      
+      @friend.max_talkers(entries).should == [  
+        {
+          :uid   => 1,
+          :name => 'John',
+          :count => 3
+        },
+        {
+          :uid   => 2,
+          :name => 'Tom',
+          :count => 2
+        }
+      ]
+      
+    end
+    
   end
   
 end
