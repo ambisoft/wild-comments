@@ -20,11 +20,11 @@ class Friend
     Rails::logger.debug("Fetching feed")
     feed = graph.get_connections(uid, 'feed')
     Rails::logger.debug("Fetched " + feed.count.to_s)    
-    result = feed
+    result = feed.to_a
     until (feed.empty? || result.count >= max_to_fetch)
       Rails::logger.debug("Fetching the next page")
       feed = feed.next_page
-      result += feed
+      result += feed.to_a
       Rails::logger.debug("Result size is #{result.count}")
     end
     result.count > max_to_fetch ? result[0, max_to_fetch] : result
