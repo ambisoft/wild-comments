@@ -65,13 +65,13 @@ describe TalkersController do
         
         get :index, :friend_id => @friend.uid, :format => :js
         
-        expected =  '{"entries_count":0,"talkers":[' +
-                    '{"name":"John","uid":1,"count":3},' +
-                    '{"name":"Tom","uid":2,"count":2}' +
-                    '],"comments_count":0,"status":0}'
-                       
-        response.body.should == expected
+        result = ActiveSupport::JSON.decode response.body
+        result['talkers'].first['name'].should == 'John'
+        result['talkers'].first['count'].should == 3
         
+        result['talkers'][1]['name'].should == 'Tom'
+        result['talkers'][1]['count'].should == 2
+                
       end
       
     end
