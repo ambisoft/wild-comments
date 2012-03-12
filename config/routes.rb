@@ -4,6 +4,7 @@ FbBase::Application.routes.draw do
 
   resources :friends do
     resources :talkers
+    resources :entries
   end    
 
   # The priority is based upon order of creation:

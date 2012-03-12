@@ -38,7 +38,7 @@ class Friend
     
     entries.each_with_index do |entry, i|
       
-      Rails::logger.debug("Processing entry #{i}")
+      #Rails::logger.debug("Processing entry #{i}")
       
       comments = comments_for_entry(entry)
       

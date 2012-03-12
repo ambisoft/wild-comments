@@ -4,7 +4,8 @@ class FriendsController < ApplicationController
   before_filter :resolve_friend!
   
   def show    
-    @entries = @friend.entries(10)    
+    #@entries = @friend.entries(10)    
+    @entries = []
   end      
   
 end

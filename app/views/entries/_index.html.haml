@@ -1,0 +1,7 @@
+%ul.entries    
+  - @entries.each do |entry|
+    %li
+      .meta
+        %span.date= entry_date(entry['created_time'])
+        = render 'entries/by', :entry => entry
+      = render entry_partial(entry), :entry => entry    

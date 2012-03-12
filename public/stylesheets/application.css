@@ -67,7 +67,7 @@ ul.entries li {
     clear: both;
 }
 
-#loading {
+.loading {
     line-height: 32px;
     padding-left: 40px;
     background: url(../images/loading2.gif) no-repeat;

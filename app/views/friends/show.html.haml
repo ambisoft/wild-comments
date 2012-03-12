@@ -8,23 +8,21 @@
 .row
   .span8
     %h3 Latest Entries
-    %ul.entries    
-      - @entries.each do |entry|
-        %li
-          .meta
-            %span.date= entry_date(entry['created_time'])
-            = render 'entries/by', :entry => entry
-          = render entry_partial(entry), :entry => entry    
+
+    .feed-wrapper
+      .loading Loading the feed - please wait...    
         
   .span4
     %h3 The biggest talkers in this Feed
     
     .talkers-info
-      #loading Analyzing the feed - please wait...
+      .loading Analyzing the feed - please wait...
 
 :javascript
   $(function() {
-     var url = '#{friend_talkers_path(@friend.uid)}';     
-     WILD_COMMENTS.pull_talkers(url);
+     var feed_url = '#{friend_entries_path(@friend.uid)}';     
+     var talkers_url = '#{friend_talkers_path(@friend.uid)}';
+     WILD_COMMENTS.pull_entries(feed_url);          
+     WILD_COMMENTS.pull_talkers(talkers_url);
   });
 
