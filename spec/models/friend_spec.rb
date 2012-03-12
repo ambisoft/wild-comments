@@ -51,6 +51,63 @@ describe Friend do
     
   end
   
+  describe 'comments for entry' do
+    
+    it 'should return comments in the record if all are there' do
+      
+      comments = [
+        { 'from' => 'User 1' },
+        { 'from' => 'User 2' }
+      ]
+      
+      entry = {
+        'comments' => {
+          'count' => 2,
+          'data'  => comments
+        }
+      }
+      
+      @friend.comments_for_entry(entry).should == comments
+      
+    end
+    
+    it 'should fetch comments from the Graph if not all are in the record' do
+      
+      all_comments = [
+        { 'from' => 'User 1' },
+        { 'from' => 'User 2' },
+        { 'from' => 'User 3' },
+        { 'from' => 'User 4' },
+        { 'from' => 'User 5' }        
+      ]
+      
+      entry = {
+        'id'  => 123,
+        'comments' => {
+          'count' => 5,
+          'data'  => [
+            { 'from' => 'User 1' },
+            { 'from' => 'User 2' }
+          ]
+        }
+      }
+      
+      full_entry = {
+        'comments' => {
+          'count' => 5,
+          'data'  => all_comments
+        }
+      }
+      
+      @graph.should_receive(:get_object).with(entry['id']).once.and_return(full_entry)
+      
+      @friend.comments_for_entry(entry).should == all_comments
+      
+    end
+    
+    
+  end
+  
   
   describe 'sorting commenters' do
     
