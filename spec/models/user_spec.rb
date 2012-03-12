@@ -4,7 +4,17 @@ describe User do
   before do
     @graph = mock('graph api')
     @uid = 42
-    @user = User.new(@graph, @uid)
+    @user = User.new(@graph, @uid, 'Blake Jones')
+  end
+  
+  describe "to_hash" do
+    it "should return hash representation" do
+      @user.to_hash.should == {
+        'id'    => @user.uid,
+        'name'  => @user.name
+      }
+    end
+    
   end
   
   describe "retrieving friends" do

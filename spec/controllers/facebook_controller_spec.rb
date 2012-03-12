@@ -12,7 +12,10 @@ describe FacebookController do
     context 'when logged into facebook' do
       before do        
         oauth_user_login('1234567890', 42)
-        @friends = mock('friends')
+        @friends = [
+          { 'name' => 'Tom Jones', 'id' => 10 },
+          { 'name' => 'Mark Smith', 'id' => 11 }
+        ]
         @user.should_receive(:friends).and_return(@friends)
         get :index
       end

@@ -1,9 +1,17 @@
 class User
-  attr_accessor :uid, :graph
+  attr_accessor :uid, :graph, :name
 
-  def initialize(graph, uid)
+  def initialize(graph, uid, name = '')
     @graph = graph
     @uid = uid
+    @name = name
+  end
+  
+  def to_hash
+    {
+      'id'    => self.uid,
+      'name'  => self.name
+    }
   end
   
   def friend(friend_id)
