@@ -7,6 +7,7 @@ WILD_COMMENTS.render_commenters_table = function(results) {
   var thead_tr = $('<tr/>');
   thead_tr.append($('<th/>').html('Name'));
   thead_tr.append($('<th/>').addClass('comments').html('Comments'));
+  thead.append(thead_tr);
   
   var tbody = $('<tbody/>');
   if (results.talkers.length) {
